@@ -6,6 +6,9 @@ use std::path::PathBuf;
 use std::{error, result};
 use structopt::StructOpt;
 
+// Laziest error type I have ever used, but...
+//
+// ...in many ways, also the best.
 type AppResult<T> = result::Result<T, Box<error::Error>>;
 
 #[derive(Debug, StructOpt)]
@@ -58,12 +61,7 @@ impl Meeting {
 impl Display for Meeting {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let local = self.timestamp.with_timezone(&Local);
-        write!(
-            f,
-            "{}: {} minutes",
-            local.format("%F %R"),
-            self.length
-        )
+        write!(f, "{}: {} minutes", local.format("%F %R"), self.length)
     }
 }
 

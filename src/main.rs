@@ -31,6 +31,9 @@ enum Opt {
     /// will list only meetings for the current day.
     #[structopt(name = "list", about = "List meetings for a given timeframe")]
     List {
+        // It probably seems pointless to accept a NaiveDate here as opposed to a Date<Local>,
+        // but I already tried swapping it: unlike Date<Local>, NaiveDate implements FromStr.
+
         /// e.g. 2018-12-31
         start: Option<NaiveDate>,
         /// e.g. 2018-12-31
